@@ -53,7 +53,10 @@ export default function HeroSection() {
               <FiArrowRight size={20} />
             </PrimaryButton>
 
-            <SecondaryButton href="/resume.pdf">
+            <SecondaryButton
+              href={`${import.meta.env.BASE_URL}docs/resume.pdf`}
+              download
+            >
               <FiDownload size={20} />
               이력서 다운로드
             </SecondaryButton>
