@@ -278,12 +278,23 @@ export default function ProjectsSection() {
             </ModalHeader>
 
             {modal.type === "presentation" && (
-              <PdfBox>
-                <iframe
-                  src={`${modal.project.presentationUrl}#view=FitH`}
-                  title={`${modal.project.title} 발표자료`}
-                />
-              </PdfBox>
+              <>
+                <PdfBox>
+                  <iframe
+                    src={`${modal.project.presentationUrl}#view=FitH`}
+                    title={`${modal.project.title} 발표자료`}
+                  />
+                </PdfBox>
+
+                <MobilePdfFallback
+                  href={modal.project.presentationUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  모바일에서 발표자료 열기
+                  <FiArrowUpRight size={18} />
+                </MobilePdfFallback>
+              </>
             )}
 
             {modal.type === "video" && (
@@ -754,8 +765,8 @@ const PdfBox = styled.div`
     background: ${colors.white};
   }
 
-  @media (max-width: 640px) {
-    height: 460px;
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -769,5 +780,26 @@ const VideoBox = styled.div`
     width: 100%;
     max-height: 640px;
     object-fit: contain;
+  }
+`;
+
+const MobilePdfFallback = styled.a`
+  display: none;
+  width: fit-content;
+  min-height: 48px;
+  margin-top: 16px;
+  padding: 0 18px;
+  border-radius: 14px;
+  background: ${colors.accent};
+  color: ${colors.white};
+  text-decoration: none;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 900;
+
+  @media (max-width: 768px) {
+    display: inline-flex;
   }
 `;
